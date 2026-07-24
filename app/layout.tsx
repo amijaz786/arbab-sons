@@ -1,13 +1,14 @@
 import "./globals.css";
 import Image from "next/image";
 import Footer from "./components/Footer";   // ✅ add this
+import { ReactNode } from "react";          // ✅ import type
 
 export const metadata = {
   title: "Arbab & Sons",
   description: "Premium Herbal Medicine",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {   // ✅ typed children
   return (
     <html lang="en">
       <body>
