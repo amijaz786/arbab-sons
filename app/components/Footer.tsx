@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-green-900 text-white py-6 mt-12">
+    <footer className="bg-green-700 text-white py-6 mt-12">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         
         {/* Contact Info */}
@@ -21,7 +21,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="text-center text-sm text-gray-400 mt-6">
+      <div className="text-center text-sm text-white-400 mt-6">
         © {new Date().getFullYear()} Arbab & Sons. All rights reserved.
       </div>
     </footer>
