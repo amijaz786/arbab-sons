@@ -1,4 +1,11 @@
 import Image from "next/image";
+import { Playfair_Display } from "next/font/google";
+
+// Import Google Font
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function Home() {
   return (
@@ -7,24 +14,35 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full text-center py-12">
         <div className="max-w-screen-lg mx-auto px-2">
-          <h1 className="font-extrabold whitespace-nowrap text-3xl sm:text-5xl md:text-6xl mb-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-700 bg-clip-text text-transparent drop-shadow-lg">
+          <h1
+            className={`${playfair.className} font-extrabold whitespace-nowrap text-3xl sm:text-5xl md:text-6xl mb-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-700 bg-clip-text text-transparent drop-shadow-lg`}
+          >
             Arbab & Sons
           </h1>
-          <h2 className="text-base sm:text-xl uppercase tracking-widest text-green-200 mb-6">
+          <h2
+            className={`${playfair.className} text-base sm:text-xl uppercase tracking-widest text-green-200 mb-6`}
+          >
             Premium Herbal Medicine
           </h2>
-          <p className="text-sm sm:text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p
+            className={`${playfair.className} italic text-sm sm:text-lg text-gray-200 mb-8 max-w-2xl mx-auto`}
+          >
             Discover the healing power of Cordyceps and natural remedies. 
-            Our herbal wellness products are crafted to restore balance, 
-            boost vitality, and support a healthy lifestyle.
+            Our herbal wellness products are crafted to restore balance and support a healthy lifestyle.
           </p>
 
           {/* Call-to-Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/shop" className="bg-yellow-400 text-black px-6 py-3 rounded-lg hover:bg-yellow-500 font-semibold text-sm sm:text-base">
+            <a
+              href="/shop"
+              className="bg-yellow-400 text-black px-6 py-3 rounded-lg hover:bg-yellow-500 font-semibold text-sm sm:text-base"
+            >
               Explore Products
             </a>
-            <a href="/about" className="border border-yellow-400 px-6 py-3 rounded-lg hover:bg-yellow-400 hover:text-black font-semibold text-sm sm:text-base">
+            <a
+              href="/about"
+              className="border border-yellow-400 px-6 py-3 rounded-lg hover:bg-yellow-400 hover:text-black font-semibold text-sm sm:text-base"
+            >
               Learn More
             </a>
           </div>
@@ -82,4 +100,5 @@ export default function Home() {
     </main>
   );
 }
+
 
