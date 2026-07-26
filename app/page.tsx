@@ -17,43 +17,37 @@ export default function Home() {
     <main className="bg-green-900 text-white w-full min-h-screen flex flex-col">
       
       {/* Hero Section */}
-      <section className="flex-grow w-full text-center py-12">
-        <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1
-            className={`${playfair.className} font-extrabold whitespace-nowrap text-3xl sm:text-5xl md:text-6xl mb-2 bg-gradient-to-r from-yellow-400 via-green-400 to-green-700 bg-clip-text text-transparent drop-shadow-lg`}
-          >
-            Arbab & Sons
-          </h1>
-          <h2
-            className={`${playfair.className} text-base sm:text-xl uppercase tracking-widest text-yellow-200 mb-6`}
-          >
-            Premium Herbal Medicine
-          </h2>
-          <p
-            className={`${poppins.className} italic text-sm sm:text-lg text-gray-100 mb-8 max-w-3xl mx-auto leading-relaxed`}
-          >
-            Discover the healing power of Cordyceps and natural remedies. 
-            Our herbal wellness products are crafted to restore balance, 
-            boost vitality, and support a healthy lifestyle.
-          </p>
+      <section className="bg-green-900 text-center py-20">
+  <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 className="text-4xl sm:text-5xl font-bold text-yellow-300 mb-4">
+      Arbab & Sons
+    </h1>
+    <h2 className="text-xl sm:text-2xl text-yellow-200 uppercase tracking-wide mb-8">
+      Premium Herbal Medicine
+    </h2>
 
-          {/* Call-to-Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/shop"
-              className="bg-yellow-400 text-black px-6 py-3 rounded-lg hover:bg-yellow-500 shadow-md font-semibold text-sm sm:text-base transition-transform hover:scale-105"
-            >
-              Explore Products
-            </a>
-            <a
-              href="/about"
-              className="border border-yellow-400 px-6 py-3 rounded-lg hover:bg-yellow-400 hover:text-black shadow-md font-semibold text-sm sm:text-base transition-transform hover:scale-105"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-      </section>
+    <p className="italic text-green-100 max-w-2xl mx-auto leading-relaxed mb-10">
+      Discover the healing power of <span className="font-semibold text-yellow-300">Cordyceps </span> 
+      and natural remedies. Our herbal wellness products are crafted to restore balance, 
+      <span className="font-semibold text-yellow-300">boost vitality</span>, and support a healthy lifestyle.
+    </p>
+
+    <div className="flex justify-center gap-6">
+      <a
+        href="/shop"
+        className="bg-yellow-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-yellow-500 transition"
+      >
+        Explore Products
+      </a>
+      <a
+        href="/about"
+        className="border border-yellow-400 text-yellow-100 px-6 py-3 rounded-md font-semibold hover:bg-yellow-400 hover:text-black transition"
+      >
+        Learn More
+      </a>
+    </div>
+  </div>
+</section>
 
       {/* Featured Products Grid */}
       <section className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
