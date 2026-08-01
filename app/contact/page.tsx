@@ -17,24 +17,36 @@ const handleChange = (
   setSubmitted(true);
 };
 
-  const explanations = {
-    "Disagree": "I disagree with the current management to continue.",
-    "Strongly Disagree": "I strongly do not agree with this decision.",
-    "Unsatisfied": "I am unsatisfied with the current service.",
-    "Very Unsatisfied": "I am very unsatisfied with the current service.",
-    "Neutral": "I feel neutral about this matter.",
-    "Agree": "I agree with this decision.",
-    "Strongly Agree": "I strongly agree with this decision.",
-    "Yes": "Yes, I have participated.",
-    "No": "No, I have not participated.",
-    "Very Satisfied": "I am very satisfied with this service.",
-    "Satisfied": "I am satisfied with this service.",
-    "1": "Very Poor (1 star).",
-    "2": "Poor (2 stars).",
-    "3": "Average (3 stars).",
-    "4": "Good (4 stars).",
-    "5": "Excellent (5 stars)."
-  };
+  type ExplanationKey =
+  | "Disagree"
+  | "Strongly Disagree"
+  | "Unsatisfied"
+  | "Very Unsatisfied"
+  | "Neutral"
+  | "Agree"
+  | "Strongly Agree"
+  | "Yes"
+  | "No"
+  | "Very Satisfied"
+  | "1"
+  | "5";
+
+const explanations: Record<ExplanationKey, string> = {
+  Disagree: "You are not satisfied",
+  "Strongly Disagree": "You are very unsatisfied",
+  Unsatisfied: "Not happy with the service",
+  "Very Unsatisfied": "Extremely unhappy",
+  Neutral: "Neither satisfied nor unsatisfied",
+  Agree: "You are satisfied",
+  "Strongly Agree": "You are very satisfied",
+  Yes: "Positive response",
+  No: "Negative response",
+  "Very Satisfied": "Extremely happy",
+  "1": "Lowest rating",
+  "5": "Highest rating",
+};
+
+
 
   const downloadPDF = () => {
     const doc = new jsPDF();
@@ -43,7 +55,7 @@ const handleChange = (
 
     let y = 40;
     Object.entries(formData).forEach(([key, value]) => {
-  const detail = explanations[value as string] || value;
+  const detail = explanations[value as ExplanationKey] || value;
   doc.text(`${key}: ${detail}`, 20, y);
   y += 10;
 });
