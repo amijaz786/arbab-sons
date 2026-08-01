@@ -182,7 +182,13 @@ const explanations: Record<ExplanationKey, string> = {
 
         {/* Comments */}
         <label className="block text-black font-semibold">Other Suggestions or Comments</label>
-        <textarea name="Comments" onChange={handleChange} rows="4" className="w-full border px-3 py-2 rounded"></textarea>
+      <textarea
+        name="Comments"
+        onChange={handleChange}
+        rows={4}
+       className="w-full border px-3 py-2"
+     />
+</textarea>
 
         {/* Submit */}
         <button type="submit" className="bg-green-700 text-white font-bold py-2 px-4 rounded hover:bg-green-800">
