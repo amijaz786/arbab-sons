@@ -12,10 +12,10 @@ const handleChange = (
   setFormData({ ...formData, [e.target.name]: e.target.value });
 };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSubmitted(true);
+};
 
   const explanations = {
     "Disagree": "I disagree with the current management to continue.",
