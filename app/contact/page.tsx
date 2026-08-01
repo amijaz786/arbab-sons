@@ -1,199 +1,200 @@
 "use client";
+
+import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
-import jsPDF from "jspdf";
 
 export default function SocietySurvey() {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [state, handleSubmit] = useForm("mgogjojz"); // your Formspree form ID
+  const [language, setLanguage] = useState("en");
 
-const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-) => {
-  setFormData({ ...formData, [e.target.name]: e.target.value });
-};
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setSubmitted(true);
-};
-
-  type ExplanationKey =
-  | "Disagree"
-  | "Strongly Disagree"
-  | "Unsatisfied"
-  | "Very Unsatisfied"
-  | "Neutral"
-  | "Agree"
-  | "Strongly Agree"
-  | "Yes"
-  | "No"
-  | "Very Satisfied"
-  | "1"
-  | "5";
-
-const explanations: Record<ExplanationKey, string> = {
-  Disagree: "You are not satisfied",
-  "Strongly Disagree": "You are very unsatisfied",
-  Unsatisfied: "Not happy with the service",
-  "Very Unsatisfied": "Extremely unhappy",
-  Neutral: "Neither satisfied nor unsatisfied",
-  Agree: "You are satisfied",
-  "Strongly Agree": "You are very satisfied",
-  Yes: "Positive response",
-  No: "Negative response",
-  "Very Satisfied": "Extremely happy",
-  "1": "Lowest rating",
-  "5": "Highest rating",
-};
-
-
-
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    doc.setFontSize(14);
-    doc.text("Society Survey Form - Response Summary", 20, 20);
-
-    let y = 40;
-    Object.entries(formData).forEach(([key, value]) => {
-  const detail = explanations[value as ExplanationKey] || value;
-  doc.text(`${key}: ${detail}`, 20, y);
-  y += 10;
-});
-
-    doc.save("Survey_Response.pdf");
+  const translations = {
+    en: {
+      title: "Society Survey Form",
+      intro: "Please share your views about maintenance charges, yearly budget, and community facilities.",
+      name: "Full Name",
+      flat: "Flat / Apartment Number",
+      email: "Email",
+      maintenance: "How satisfied are you with current maintenance charges?",
+      maintenanceOptions: ["Very Satisfied", "Satisfied", "Neutral", "Unsatisfied", "Very Unsatisfied"],
+      budget: "Do you agree with the yearly budget allocation?",
+      budgetOptions: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"],
+      security: "Security Services",
+      cleanliness: "Cleanliness",
+      parking: "Parking Facilities",
+      facilityOptions: ["Excellent", "Good", "Neutral", "Poor"],
+      comments: "Other Suggestions or Comments",
+      submit: "Submit Survey",
+      thanks: "✅ Thank you for your feedback!",
+    },
+    tr: {
+      title: "Site Anket Formu",
+      intro: "Lütfen aidat ücretleri, yıllık bütçe ve ortak tesisler hakkında görüşlerinizi paylaşın.",
+      name: "Ad Soyad",
+      flat: "Daire Numarası",
+      email: "E-posta",
+      maintenance: "Mevcut aidat ücretlerinden ne kadar memnunsunuz?",
+      maintenanceOptions: ["Çok Memnun", "Memnun", "Nötr", "Memnun Değil", "Hiç Memnun Değil"],
+      budget: "Yıllık bütçe tahsisini onaylıyor musunuz?",
+      budgetOptions: ["Kesinlikle Katılıyorum", "Katılıyorum", "Nötr", "Katılmıyorum", "Kesinlikle Katılmıyorum"],
+      security: "Güvenlik Hizmetleri",
+      cleanliness: "Temizlik",
+      parking: "Otopark Hizmetleri",
+      facilityOptions: ["Mükemmel", "İyi", "Nötr", "Kötü"],
+      comments: "Diğer Öneriler veya Yorumlar",
+      submit: "Anketi Gönder",
+      thanks: "✅ Geri bildiriminiz için teşekkürler!",
+    },
+    ar: {
+      title: "نموذج استبيان المجتمع",
+      intro: "يرجى مشاركة آرائكم حول رسوم الصيانة والميزانية السنوية والمرافق العامة.",
+      name: "الاسم الكامل",
+      flat: "رقم الشقة",
+      email: "البريد الإلكتروني",
+      maintenance: "هل أنت راضٍ عن رسوم الصيانة الحالية؟",
+      maintenanceOptions: ["راضٍ جدًا", "راضٍ", "محايد", "غير راضٍ", "غير راضٍ جدًا"],
+      budget: "هل توافق على تخصيص الميزانية السنوية؟",
+      budgetOptions: ["أوافق بشدة", "أوافق", "محايد", "لا أوافق", "لا أوافق بشدة"],
+      security: "خدمات الأمن",
+      cleanliness: "النظافة",
+      parking: "مرافق المواقف",
+      facilityOptions: ["ممتاز", "جيد", "محايد", "سيئ"],
+      comments: "اقتراحات أو تعليقات أخرى",
+      submit: "إرسال الاستبيان",
+      thanks: "✅ شكراً لملاحظاتكم!",
+    },
   };
 
-  if (submitted) {
-    return (
-      <main className="min-h-screen flex flex-col items-center justify-center bg-green-50 px-6 py-10">
-        <h1 className="text-3xl font-bold text-green-800 mb-4">✅ Thank you for your feedback!</h1>
-        <p className="text-gray-700 text-lg mb-6">
-          Your responses have been recorded. You can download a summary below.
-        </p>
-        <button
-          onClick={downloadPDF}
-          className="bg-green-700 text-white font-bold py-2 px-4 rounded hover:bg-green-800"
-        >
-          Download PDF Summary
-        </button>
-      </main>
-    );
-  }
-
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-6 py-10">
-      <h1 className="text-4xl font-bold text-green-900 mb-4">Society Survey Form</h1>
-      <p className="text-gray-800 mb-6 text-lg">
-        Please share your views about maintenance charges, yearly budget, and community facilities.
-      </p>
+    <main className="min-h-screen flex flex-col items-center justify-center bg-green-100 px-6">
+      {/* Language Selector */}
+      <div className="mb-4">
+        <label className="text-gray-900 font-medium mr-2">Language:</label>
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="border border-gray-600 rounded px-2 py-1 text-gray-900 bg-white font-semibold"
+        >
+          <option value="en">English</option>
+          <option value="tr">Türkçe</option>
+          <option value="ar">العربية</option>
+        </select>
+      </div>
 
-      <form onSubmit={handleSubmit} className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-6 space-y-6">
-        {/* Resident Info */}
-        <fieldset className="border p-4 rounded">
-          <legend className="text-green-800 font-bold text-lg">Resident Information</legend>
+      <h1 className="text-4xl font-bold text-green-900 mb-6">{translations[language].title}</h1>
+      <p className="text-gray-800 mb-6">{translations[language].intro}</p>
 
-          <label className="block text-black font-semibold mt-2">Full Name</label>
-          <input type="text" name="Full Name" onChange={handleChange} required className="w-full border px-3 py-2 rounded text-black placeholder-gray-400" placeholder="Enter your full name" />
+      <section className="w-full max-w-3xl bg-white border border-green-400 shadow-lg rounded-lg p-6">
+        {state.succeeded ? (
+          <p className="text-green-700 font-semibold">{translations[language].thanks}</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            {/* Resident Information */}
+            <fieldset className="border border-gray-500 p-4 rounded">
+              <legend className="font-semibold text-green-800">{translations[language].name}</legend>
 
-          <label className="block text-black font-semibold mt-2">Flat / Apartment Number</label>
-          <input type="text" name="Flat Number" onChange={handleChange} required className="w-full border px-3 py-2 rounded text-black placeholder-gray-400" placeholder="e.g. Block-Flat number" />
+              <label htmlFor="name" className="text-gray-900 font-medium">{translations[language].name}:</label>
+              <input id="name" type="text" name="name" required className="border border-gray-600 rounded px-2 py-1 mb-2 text-gray-900 bg-white focus:border-green-700 focus:ring-green-700" />
 
-          <label className="block text-black font-semibold mt-2">Email</label>
-          <input type="email" name="Email" onChange={handleChange} required className="w-full border px-3 py-2 rounded text-black placeholder-gray-400" placeholder="you@example.com" />
+              <label htmlFor="flat" className="text-gray-900 font-medium">{translations[language].flat}:</label>
+              <input id="flat" type="text" name="flat" required className="border border-gray-600 rounded px-2 py-1 mb-2 text-gray-900 bg-white focus:border-green-700 focus:ring-green-700" />
 
-          <label className="block text-black font-semibold mt-2">Cell Phone Number</label>
-          <input type="tel" name="Cell Phone" onChange={handleChange} pattern="[0-9]{10,15}" required className="w-full border px-3 py-2 rounded text-black placeholder-gray-400" placeholder="e.g. 5551234567" />
+              <label htmlFor="email" className="text-gray-900 font-medium">{translations[language].email}:</label>
+              <input id="email" type="email" name="email" required className="border border-gray-600 rounded px-2 py-1 text-gray-900 bg-white focus:border-green-700 focus:ring-green-700" />
+              <ValidationError field="email" errors={state.errors} />
+            </fieldset>
 
-          <label className="block text-black font-semibold mt-2">TRC Number</label>
-          <input type="text" name="TRC Number" onChange={handleChange} pattern="[0-9]{11}" required className="w-full border px-3 py-2 rounded text-black placeholder-gray-400" placeholder="11-digit TRC number" />
-        </fieldset>
+            {/* Maintenance Charges Satisfaction */}
+            <fieldset className="border border-gray-500 p-4 rounded">
+              <legend className="font-semibold text-green-800">{translations[language].maintenance}</legend>
+              <select id="maintenance" name="maintenance" defaultValue="neutral" className="border border-gray-600 rounded px-2 py-1 text-gray-900 bg-white font-semibold focus:border-green-700 focus:ring-green-700">
+                {translations[language].maintenanceOptions.map((opt, idx) => (
+                  <option key={idx} value={opt.toLowerCase()}>{opt}</option>
+                ))}
+              </select>
+            </fieldset>
 
-        {/* Maintenance Charges */}
-        <fieldset className="border p-4 rounded">
-          <legend className="text-green-800 font-bold text-lg">Maintenance Charges</legend>
-          <p className="text-black font-semibold mb-2">How satisfied are you with current maintenance charges?</p>
-          {["Very Satisfied","Satisfied","Neutral","Unsatisfied","Very Unsatisfied"].map(opt => (
-            <label key={opt} className="block text-black font-bold">
-              <input type="radio" name="Maintenance Charges" value={opt} onChange={handleChange} className="mr-2" required /> {opt}
-            </label>
-          ))}
-        </fieldset>
+            {/* Yearly Budget Opinion */}
+            <fieldset className="border border-gray-500 p-4 rounded">
+              <legend className="font-semibold text-green-800">{translations[language].budget}</legend>
+              <select id="budget" name="budget" defaultValue="neutral" className="border border-gray-600 rounded px-2 py-1 text-gray-900 bg-white font-semibold focus:border-green-700 focus:ring-green-700">
+                {translations[language].budgetOptions.map((opt, idx) => (
+                  <option key={idx} value={opt.toLowerCase()}>{opt}</option>
+                ))}
+              </select>
+            </fieldset>
 
-        {/* Budget */}
-        <fieldset className="border p-4 rounded">
-          <legend className="text-green-800 font-bold text-lg">Yearly Budget</legend>
-          <p className="text-black font-semibold mb-2">Do you agree with the yearly budget allocation?</p>
-          {["Strongly Agree","Agree","Neutral","Disagree","Strongly Disagree"].map(opt => (
-            <label key={opt} className="block text-black font-bold">
-              <input type="radio" name="Yearly Budget" value={opt} onChange={handleChange} className="mr-2" required /> {opt}
-            </label>
-          ))}
-        </fieldset>
+{/* Community Facilities */}
+<fieldset className="border border-gray-500 p-4 rounded">
+  <legend className="font-semibold text-green-800">Community Facilities</legend>
 
-        {/* Governance */}
-        <fieldset className="border p-4 rounded">
-          <legend className="text-green-800 font-bold text-lg">Governance & Participation</legend>
+  <label htmlFor="security" className="text-gray-900 font-medium">
+    {translations[language].security}:
+  </label>
+  <select
+    id="security"
+    name="security"
+    defaultValue="neutral"
+    className="border border-gray-600 rounded px-2 py-1 mb-2 text-gray-900 bg-white font-semibold focus:border-green-700 focus:ring-green-700"
+  >
+    {translations[language].facilityOptions.map((opt, idx) => (
+      <option key={idx} value={opt.toLowerCase()}>{opt}</option>
+    ))}
+  </select>
 
-          <p className="text-black font-semibold">Have you ever been invited for a meeting?</p>
-          <label className="block text-black font-bold">
-            <input type="radio" name="Invited Meeting" value="Yes" onChange={handleChange} className="mr-2" required /> Yes
-          </label>
-          <label className="block text-black font-bold">
-            <input type="radio" name="Invited Meeting" value="No" onChange={handleChange} className="mr-2" /> No
-          </label>
+  <label htmlFor="cleanliness" className="text-gray-900 font-medium">
+    {translations[language].cleanliness}:
+  </label>
+  <select
+    id="cleanliness"
+    name="cleanliness"
+    defaultValue="neutral"
+    className="border border-gray-600 rounded px-2 py-1 mb-2 text-gray-900 bg-white font-semibold focus:border-green-700 focus:ring-green-700"
+  >
+    {translations[language].facilityOptions.map((opt, idx) => (
+      <option key={idx} value={opt.toLowerCase()}>{opt}</option>
+    ))}
+  </select>
 
-          <p className="text-black font-semibold mt-3">Have you voted for the selection of management?</p>
-          <label className="block text-black font-bold">
-            <input type="radio" name="Voted Management" value="Yes" onChange={handleChange} className="mr-2" required /> Yes
-          </label>
-          <label className="block text-black font-bold">
-            <input type="radio" name="Voted Management" value="No" onChange={handleChange} className="mr-2" /> No
-          </label>
+  <label htmlFor="parking" className="text-gray-900 font-medium">
+    {translations[language].parking}:
+  </label>
+  <select
+    id="parking"
+    name="parking"
+    defaultValue="neutral"
+    className="border border-gray-600 rounded px-2 py-1 mb-2 text-gray-900 bg-white font-semibold focus:border-green-700 focus:ring-green-700"
+  >
+    {translations[language].facilityOptions.map((opt, idx) => (
+      <option key={idx} value={opt.toLowerCase()}>{opt}</option>
+    ))}
+  </select>
+</fieldset>
+            
 
-          <p className="text-black font-semibold mt-3">Are you satisfied with the water bill charges?</p>
-          {["Very Satisfied","Satisfied","Neutral","Unsatisfied","Very Unsatisfied"].map(opt => (
-            <label key={opt} className="block text-black font-bold">
-              <input type="radio" name="Water Charges" value={opt} onChange={handleChange} className="mr-2" required /> {opt}
-            </label>
-          ))}
-
-          <p className="text-black font-semibold mt-3">Do you agree with the current management to continue?</p>
-          {["Strongly Agree","Agree","Neutral","Disagree","Strongly Disagree"].map(opt => (
-            <label key={opt} className="block text-black font-bold">
-              <input type="radio" name="Continue Management" value={opt} onChange={handleChange} className="mr-2" required /> {opt}
-            </label>
-          ))}
-	</fieldset>
-
-        {/* Facilities with Star Ratings */}
-        <fieldset className="border p-4 rounded">
-          <legend className="text-green-800 font-bold text-lg">Community Facilities</legend>
-          {["Security Services","Cleanliness","Parking Facilities"].map(facility => (
-            <div key={facility} className="mb-4">
-              <p className="text-black font-semibold">{facility}</p>
-              {[1,2,3,4,5].map(star => (
-                <label key={star} className="mr-2 text-yellow-500 font-bold">
-                  <input type="radio" name={facility} value={star} onChange={handleChange} className="hidden" required /> ⭐
-                </label>
-              ))}
-            </div>
-          ))}
-       
+{/* Additional Comments */}
+<label htmlFor="comments" className="text-gray-900 font-medium">
+  {translations[language].comments}:
+</label>
 <textarea
-  name="Comments"
-  onChange={handleChange}
-  rows={4}
-  className="w-full border px-3 py-2"
->
-  {/* optional default text inside */}
-</textarea>
+  id="comments"
+  name="comments"
+  rows="5"
+  className="border border-gray-600 rounded px-2 py-1 text-gray-900 bg-white focus:border-green-700 focus:ring-green-700"
+></textarea>
+<ValidationError field="comments" errors={state.errors} />
 
-        {/* Submit */}
-        <button type="submit" className="bg-green-700 text-white font-bold py-2 px-4 rounded hover:bg-green-800">
-          Submit Survey
-        </button>
-      </form>
+{/* Submit */}
+<button
+  type="submit"
+  disabled={state.submitting}
+  className="bg-green-700 text-white font-semibold py-2 px-4 rounded hover:bg-green-800 shadow-md"
+>
+  {state.submitting ? "Submitting..." : translations[language].submit}
+</button>
+
+          </form>
+        )}
+      </section>
     </main>
   );
 }
-
