@@ -6,9 +6,11 @@ export default function SocietySurvey() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({});
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
