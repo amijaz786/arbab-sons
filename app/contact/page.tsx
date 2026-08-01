@@ -178,16 +178,14 @@ const explanations: Record<ExplanationKey, string> = {
               ))}
             </div>
           ))}
-        </fieldset>
-
-        {/* Comments */}
-        <label className="block text-black font-semibold">Other Suggestions or Comments</label>
-      <textarea
-        name="Comments"
-        onChange={handleChange}
-        rows={4}
-       className="w-full border px-3 py-2"
-     />
+       
+<textarea
+  name="Comments"
+  onChange={handleChange}
+  rows={4}
+  className="w-full border px-3 py-2"
+>
+  {/* optional default text inside */}
 </textarea>
 
         {/* Submit */}
