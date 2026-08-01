@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 
 export default function SocietySurvey() {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<Record<string, string>>({});
 
 const handleChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -43,10 +43,10 @@ const handleChange = (
 
     let y = 40;
     Object.entries(formData).forEach(([key, value]) => {
-      const detail = explanations[value] || value;
-      doc.text(`${key}: ${detail}`, 20, y);
-      y += 10;
-    });
+  const detail = explanations[value as string] || value;
+  doc.text(`${key}: ${detail}`, 20, y);
+  y += 10;
+});
 
     doc.save("Survey_Response.pdf");
   };
