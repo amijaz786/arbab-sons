@@ -13,50 +13,113 @@ export default function SocietySurvey() {
       thankYou: "✅ Thank you for your feedback!",
       intro: "Please share your views about maintenance charges, yearly budget, and community facilities.",
       name: "Full Name",
+      namePlaceholder: "e.g. John Doe",
       flat: "Flat / Apartment Number",
+      flatPlaceholder: "e.g. Apartment 12B",
       email: "Email",
+      emailPlaceholder: "e.g. user@example.com",
       phone: "Cell Phone Number",
+      phonePlaceholder: "e.g. 5551234567",
       trc: "TRC Number",
+      trcPlaceholder: "11-digit TRC number",
       submit: "Submit Survey",
       comments: "Other Suggestions or Comments",
       maintenance: "Maintenance Charges",
+      maintenanceOptions: [
+      "Very Satisfied",
+      "Satisfied",
+      "Neutral",
+      "Unsatisfied",
+      "Very Unsatisfied",
+    ],
       budget: "Yearly Budget",
+      budgetOptions: [
+      "Strongly Agree",
+      "Agree",
+      "Neutral",
+      "Disagree",
+      "Strongly Disagree",
+    ],
       governance: "Governance & Participation",
+      yesNo: ["Yes", "No"],
       facilities: "Community Facilities",
+      facilityItems: ["Security Services", "Cleanliness", "Parking Facilities"],
     },
     tr: {
       title: "Site Anket Formu",
       thankYou: "✅ Geri bildiriminiz için teşekkürler!",
       intro: "Aidat, yıllık bütçe ve sosyal tesisler hakkındaki görüşlerinizi paylaşınız.",
       name: "Ad Soyad",
+      namePlaceholder: "örn. Ahmet Yılmaz",
       flat: "Daire Numarası",
+      flatPlaceholder: "örn. Daire 12B",
       email: "E-posta",
+      emailPlaceholder: "örn. kullanici@eposta.com",
       phone: "Cep Telefonu",
+      phonePlaceholder: "örn. 5551234567",
       trc: "TRC Numarası",
+      trcPlaceholder: "11 haneli TRC numarası",
       submit: "Anketi Gönder",
       comments: "Diğer Öneriler veya Yorumlar",
       maintenance: "Aidat Ücretleri",
+       maintenanceOptions: [
+      "Çok Memnun",
+      "Memnun",
+      "Nötr",
+      "Memnun Değil",
+      "Hiç Memnun Değil",
+    ],
       budget: "Yıllık Bütçe",
+      budgetOptions: [
+      "Kesinlikle Katılıyorum",
+      "Katılıyorum",
+      "Nötr",
+      "Katılmıyorum",
+      "Kesinlikle Katılmıyorum",
+    ],
       governance: "Yönetim ve Katılım",
+      yesNo: ["Evet", "Hayır"],
       facilities: "Sosyal Tesisler",
+      facilityItems: ["Güvenlik Hizmetleri", "Temizlik", "Otopark İmkanları"],
     },
     ar: {
       title: "نموذج استبيان المجتمع",
       thankYou: "✅ شكراً لملاحظاتك!",
       intro: "يرجى مشاركة آرائك حول رسوم الصيانة والميزانية السنوية والمرافق المجتمعية.",
       name: "الاسم الكامل",
+      namePlaceholder: "مثال: أحمد علي",
       flat: "رقم الشقة",
+      flatPlaceholder: "مثال: شقة 12B",
       email: "البريد الإلكتروني",
+      emailPlaceholder: "مثال: user@example.com",
       phone: "رقم الهاتف المحمول",
+      phonePlaceholder: "مثال: 5551234567",
       trc: "رقم TRC",
+      trcPlaceholder: "رقم TRC مكون من 11 خانة",
       submit: "إرسال الاستبيان",
       comments: "اقتراحات أو تعليقات أخرى",
       maintenance: "رسوم الصيانة",
-      budget: "الميزانية السنوية",
-      governance: "الحوكمة والمشاركة",
-      facilities: "المرافق المجتمعية",
-    },
-  };
+    maintenanceOptions: [
+         "راضٍ جدًا",
+      "راضٍ",
+      "محايد",
+      "غير راضٍ",
+      "غير راضٍ جدًا",
+    ],
+    budget: "الميزانية السنوية",
+    budgetOptions: [
+      "أوافق بشدة",
+      "أوافق",
+      "محايد",
+      "لا أوافق",
+      "لا أوافق بشدة",
+    ],
+    governance: "الحوكمة والمشاركة",
+    yesNo: ["نعم", "لا"],
+    facilities: "المرافق المجتمعية",
+    facilityItems: ["خدمات الأمن", "النظافة", "مرافق وقوف السيارات"],
+  },
+};
 
   const t = translations[language];
 
@@ -121,25 +184,25 @@ export default function SocietySurvey() {
         {/* Resident Info */}
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.name}</legend>
-          <input type="text" name="name" required className="w-full border px-3 py-2 rounded" placeholder={t.name} />
+          <input type="text" name="name" required className="w-full border px-3 py-2 rounded" placeholder={t.namePlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.flat}</label>
-          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded"placeholder="e.g. Apartment 12B" />
+          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded"placeholder={t.flatPlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.email}</label>
-          <input type="email" name="email" required className="w-full border px-3 py-2 rounded"placeholder="e.g. user@example.com" />
+          <input type="email" name="email" required className="w-full border px-3 py-2 rounded"placeholder={t.emailPlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.phone}</label>
-          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded"placeholder="e.g. 5551234567" />
+          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded"placeholder={t.phonePlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.trc}</label>
-          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded"placeholder="11-digit TRC number" />
+          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded"placeholder={t.trcPlaceholder} />
         </fieldset>
 
         {/* Maintenance Charges */}
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.maintenance}</legend>
-          {["Very Satisfied","Satisfied","Neutral","Unsatisfied","Very Unsatisfied"].map(opt => (
+          {t.maintenanceOptions.map(opt => (
             <label key={opt} className="block text-black font-bold">
               <input type="radio" name="maintenance" value={opt} className="mr-2" required /> {opt}
             </label>
@@ -149,7 +212,7 @@ export default function SocietySurvey() {
         {/* Budget */}
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.budget}</legend>
-          {["Strongly Agree","Agree","Neutral","Disagree","Strongly Disagree"].map(opt => (
+          {t.budgetOptions.map(opt => (
             <label key={opt} className="block text-black font-bold">
               <input type="radio" name="budget" value={opt} className="mr-2" required /> {opt}
             </label>
@@ -157,20 +220,20 @@ export default function SocietySurvey() {
         </fieldset>
 
         {/* Governance */}
-        <fieldset className="border p-4 rounded">
-          <legend className="text-green-800 font-bold text-lg">{t.governance}</legend>
-          <label className="block text-black font-bold">
-            <input type="radio" name="invitedMeeting" value="Yes" className="mr-2" required /> Yes
-          </label>
-          <label className="block text-black font-bold">
-            <input type="radio" name="invitedMeeting" value="No" className="mr-2" /> No
-          </label>
+<fieldset className="border p-4 rounded">
+  <legend className="text-green-800 font-bold text-lg">{t.governance}</legend>
+  {t.yesNo.map(opt => (
+    <label key={opt} className="block text-black font-bold">
+      <input type="radio" name="invitedMeeting" value={opt} className="mr-2" required /> {opt}
+    </label>
+  ))}
+
         </fieldset>
 
         {/* Facilities */}
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.facilities}</legend>
-          {["Security Services","Cleanliness","Parking Facilities"].map(facility => (
+          {t.facilityItems.map(facility => (
   <div key={facility} className="mb-4">
     <p className="text-black font-semibold">{facility}</p>
     {[1,2,3,4,5].map(num => (
