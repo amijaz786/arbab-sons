@@ -6,7 +6,7 @@ export default function SocietySurvey() {
   const [submitted, setSubmitted] = useState(false);
   const [responses, setResponses] = useState<Record<string, string>>({});
   const [language, setLanguage] = useState<"en" | "tr" | "ar">("en");
-
+  const [ratings, setRatings] = useState<Record<string, number>>({});
   const translations = {
     en: {
       title: "Society Survey Form",
@@ -124,16 +124,16 @@ export default function SocietySurvey() {
           <input type="text" name="name" required className="w-full border px-3 py-2 rounded" placeholder={t.name} />
 
           <label className="block text-black font-semibold mt-2">{t.flat}</label>
-          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded" />
+          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded"placeholder="e.g. Apartment 12B" />
 
           <label className="block text-black font-semibold mt-2">{t.email}</label>
-          <input type="email" name="email" required className="w-full border px-3 py-2 rounded" />
+          <input type="email" name="email" required className="w-full border px-3 py-2 rounded"placeholder="e.g. user@example.com" />
 
           <label className="block text-black font-semibold mt-2">{t.phone}</label>
-          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded" />
+          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded"placeholder="e.g. 5551234567" />
 
           <label className="block text-black font-semibold mt-2">{t.trc}</label>
-          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded" />
+          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded"placeholder="11-digit TRC number" />
         </fieldset>
 
         {/* Maintenance Charges */}
@@ -171,15 +171,23 @@ export default function SocietySurvey() {
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.facilities}</legend>
           {["Security Services","Cleanliness","Parking Facilities"].map(facility => (
-            <div key={facility} className="mb-4">
-              <p className="text-black font-semibold">{facility}</p>
-              {[1,2,3,4,5].map(star => (
-                <label key={star} className="mr-2 text-yellow-500 font-bold">
-                  <input type="radio" name={facility} value={star} className="hidden" required /> ⭐
-                </label>
-              ))}
-            </div>
-          ))}
+  <div key={facility} className="mb-4">
+    <p className="text-black font-semibold">{facility}</p>
+    {[1,2,3,4,5].map(num => (
+      <button
+        key={num}
+        type="button"
+        onClick={() => setRatings({ ...ratings, [facility]: num })}
+        className={`mx-1 px-3 py-1 rounded ${
+          ratings[facility] === num ? "bg-green-600 text-white" : "bg-gray-200 text-black"
+        }`}
+      >
+        {num}
+      </button>
+    ))}
+    <input type="hidden" name={facility} value={ratings[facility] || ""} required />
+  </div>
+))}
         </fieldset>
 
                 {/* Comments */}
