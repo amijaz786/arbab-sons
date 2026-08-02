@@ -58,7 +58,7 @@ export default function SocietySurvey() {
       "Cleanliness": "Cleanliness",
       "Parking Facilities": "Parking Facilities",
       comments: "Other Suggestions or Comments"
-    }
+    } as PdfLabels
 
     },
     tr: {
@@ -111,7 +111,7 @@ export default function SocietySurvey() {
       "Cleanliness": "Temizlik",
       "Parking Facilities": "Otopark İmkanları",
       comments: "Diğer Öneriler veya Yorumlar"
-    }
+    } as PdfLabels
     },
     ar: {
       title: "نموذج استبيان موقع أوزيورتلار إن تاورز",
@@ -163,7 +163,7 @@ export default function SocietySurvey() {
       "Cleanliness": "النظافة",
       "Parking Facilities": "مرافق وقوف السيارات",
       comments: "اقتراحات أو تعليقات أخرى"
-    }
+    } as PdfLabels
   },
 };
 
