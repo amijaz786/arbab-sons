@@ -230,7 +230,7 @@ export default function SocietySurvey() {
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value as "en" | "tr" | "ar")}
-          className="border px-3 py-2 rounded bg-white text-black"
+          className="border px-2 py-1 rounded"
         >
           <option value="en">English</option>
           <option value="tr">Türkçe</option>
@@ -245,19 +245,19 @@ export default function SocietySurvey() {
         {/* Resident Info */}
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.name}</legend>
-          <input type="text" name="name" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.namePlaceholder} />
+          <input type="text" name="name" required className="w-full border px-3 py-2 rounded" placeholder={t.namePlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.flat}</label>
-          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.flatPlaceholder} />
+          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded"placeholder={t.flatPlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.email}</label>
-          <input type="email" name="email" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.emailPlaceholder} />
+          <input type="email" name="email" required className="w-full border px-3 py-2 rounded"placeholder={t.emailPlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.phone}</label>
-          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.phonePlaceholder} />
+          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded"placeholder={t.phonePlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.trc}</label>
-          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.trcPlaceholder} />
+          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded"placeholder={t.trcPlaceholder} />
         </fieldset>
 
         {/* Maintenance Charges */}
