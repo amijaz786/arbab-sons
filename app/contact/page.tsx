@@ -9,7 +9,7 @@ export default function SocietySurvey() {
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const translations = {
     en: {
-      title: "Society Survey Form",
+      title: "Özyurtlar N Towers Site Survey Form",
       thankYou: "✅ Thank you for your feedback!",
       intro: "Please share your views about maintenance charges, yearly budget, and community facilities.",
       name: "Full Name",
@@ -46,7 +46,7 @@ export default function SocietySurvey() {
       facilityItems: ["Security Services", "Cleanliness", "Parking Facilities"],
     },
     tr: {
-      title: "Site Anket Formu",
+      title: "Özyurtlar N Towers Sitesi Anket Formu",
       thankYou: "✅ Geri bildiriminiz için teşekkürler!",
       intro: "Aidat, yıllık bütçe ve sosyal tesisler hakkındaki görüşlerinizi paylaşınız.",
       name: "Ad Soyad",
@@ -83,7 +83,7 @@ export default function SocietySurvey() {
       facilityItems: ["Güvenlik Hizmetleri", "Temizlik", "Otopark İmkanları"],
     },
     ar: {
-      title: "نموذج استبيان المجتمع",
+      title: "نموذج استبيان موقع أوزيورتلار إن تاورز",
       thankYou: "✅ شكراً لملاحظاتك!",
       intro: "يرجى مشاركة آرائك حول رسوم الصيانة والميزانية السنوية والمرافق المجتمعية.",
       name: "الاسم الكامل",
