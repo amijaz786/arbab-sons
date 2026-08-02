@@ -4,7 +4,8 @@ import { useState } from "react";
 export default function SocietySurvey() {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  // ✅ Explicit type for form submit event
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
   };
@@ -12,7 +13,9 @@ export default function SocietySurvey() {
   if (submitted) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center bg-green-50 px-6 py-10">
-        <h1 className="text-3xl font-bold text-green-800 mb-4">✅ Thank you for your feedback!</h1>
+        <h1 className="text-3xl font-bold text-green-800 mb-4">
+          ✅ Thank you for your feedback!
+        </h1>
         <p className="text-gray-700 text-lg">
           Your responses have been recorded. We appreciate your time and input in improving our community.
         </p>
@@ -136,7 +139,8 @@ export default function SocietySurvey() {
 
         {/* Comments */}
         <label className="block text-black font-semibold">Other Suggestions or Comments</label>
-        <textarea name="comments" rows="4" className="w-full border px-3 py-2 rounded"></textarea>
+        {/* ✅ rows must be number, not string */}
+        <textarea name="comments" rows={4} className="w-full border px-3 py-2 rounded"></textarea>
 
         {/* Submit */}
         <button type="submit" className="bg-green-700 text-white font-bold py-2 px-4 rounded hover:bg-green-800">
@@ -146,4 +150,5 @@ export default function SocietySurvey() {
     </main>
   );
 }
+
 
