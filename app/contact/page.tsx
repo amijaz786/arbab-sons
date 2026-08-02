@@ -44,6 +44,22 @@ export default function SocietySurvey() {
       yesNo: ["Yes", "No"],
       facilities: "Community Facilities",
       facilityItems: ["Security Services", "Cleanliness", "Parking Facilities"],
+      pdfLabels: {
+      name: "Full Name",
+      flat: "Flat / Apartment Number",
+      email: "Email",
+      cellPhone: "Cell Phone Number",
+      trcNumber: "TRC Number",
+      maintenance: "Maintenance Charges",
+      budget: "Yearly Budget",
+      invitedMeeting: "Invited to Meeting",
+      facilities: "Community Facilities",
+      "Security Services": "Security Services",
+      "Cleanliness": "Cleanliness",
+      "Parking Facilities": "Parking Facilities",
+      comments: "Other Suggestions or Comments"
+    }
+
     },
     tr: {
       title: "Özyurtlar N Towers Sitesi Anket Formu",
@@ -81,6 +97,21 @@ export default function SocietySurvey() {
       yesNo: ["Evet", "Hayır"],
       facilities: "Sosyal Tesisler",
       facilityItems: ["Güvenlik Hizmetleri", "Temizlik", "Otopark İmkanları"],
+      pdfLabels: {
+      name: "Ad Soyad",
+      flat: "Daire Numarası",
+      email: "E-posta",
+      cellPhone: "Cep Telefonu",
+      trcNumber: "TRC Numarası",
+      maintenance: "Aidat Ücretleri",
+      budget: "Yıllık Bütçe",
+      invitedMeeting: "Toplantıya Davet",
+      facilities: "Sosyal Tesisler",
+      "Security Services": "Güvenlik Hizmetleri",
+      "Cleanliness": "Temizlik",
+      "Parking Facilities": "Otopark İmkanları",
+      comments: "Diğer Öneriler veya Yorumlar"
+    }
     },
     ar: {
       title: "نموذج استبيان موقع أوزيورتلار إن تاورز",
@@ -118,6 +149,21 @@ export default function SocietySurvey() {
     yesNo: ["نعم", "لا"],
     facilities: "المرافق المجتمعية",
     facilityItems: ["خدمات الأمن", "النظافة", "مرافق وقوف السيارات"],
+    pdfLabels: {
+      name: "الاسم الكامل",
+      flat: "رقم الشقة",
+      email: "البريد الإلكتروني",
+      cellPhone: "رقم الهاتف المحمول",
+      trcNumber: "رقم TRC",
+      maintenance: "رسوم الصيانة",
+      budget: "الميزانية السنوية",
+      invitedMeeting: "دعوة للاجتماع",
+      facilities: "المرافق المجتمعية",
+      "Security Services": "خدمات الأمن",
+      "Cleanliness": "النظافة",
+      "Parking Facilities": "مرافق وقوف السيارات",
+      comments: "اقتراحات أو تعليقات أخرى"
+    }
   },
 };
 
@@ -135,16 +181,31 @@ export default function SocietySurvey() {
   };
 
   const downloadPDF = () => {
-    const doc = new jsPDF();
-    doc.setFontSize(14);
-    doc.text(t.thankYou, 10, 10);
-    let y = 20;
-    Object.entries(responses).forEach(([key, value]) => {
-      doc.text(`${key}: ${value}`, 10, y);
-      y += 10;
-    });
-    doc.save("survey-summary.pdf");
-  };
+  const doc = new jsPDF();
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  doc.text(translations[language].title, 105, 20, { align: "center" });
+
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "normal");
+  doc.text(translations[language].thankYou, 20, 35);
+
+  let y = 50;
+  const labels = translations[language].pdfLabels; // ✅ now defined
+
+  Object.entries(responses).forEach(([key, value]) => {
+    const label = labels[key] || key;
+    doc.text(`${label}: ${value}`, 20, y);
+    y += 10;
+  });
+
+  y += 20;
+  doc.setFont("helvetica", "italic");
+  doc.text("Resident Signature: ___________________________", 20, y);
+
+  doc.save("survey-summary.pdf");
+};
+
 
   if (submitted) {
     return (
@@ -169,7 +230,7 @@ export default function SocietySurvey() {
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value as "en" | "tr" | "ar")}
-          className="border px-2 py-1 rounded"
+          className="border px-3 py-2 rounded bg-white text-black"
         >
           <option value="en">English</option>
           <option value="tr">Türkçe</option>
@@ -184,19 +245,19 @@ export default function SocietySurvey() {
         {/* Resident Info */}
         <fieldset className="border p-4 rounded">
           <legend className="text-green-800 font-bold text-lg">{t.name}</legend>
-          <input type="text" name="name" required className="w-full border px-3 py-2 rounded" placeholder={t.namePlaceholder} />
+          <input type="text" name="name" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.namePlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.flat}</label>
-          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded"placeholder={t.flatPlaceholder} />
+          <input type="text" name="flat" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.flatPlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.email}</label>
-          <input type="email" name="email" required className="w-full border px-3 py-2 rounded"placeholder={t.emailPlaceholder} />
+          <input type="email" name="email" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.emailPlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.phone}</label>
-          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded"placeholder={t.phonePlaceholder} />
+          <input type="tel" name="cellPhone" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.phonePlaceholder} />
 
           <label className="block text-black font-semibold mt-2">{t.trc}</label>
-          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded"placeholder={t.trcPlaceholder} />
+          <input type="text" name="trcNumber" required className="w-full border px-3 py-2 rounded bg-white text-black placeholder-gray-500" placeholder={t.trcPlaceholder} />
         </fieldset>
 
         {/* Maintenance Charges */}
