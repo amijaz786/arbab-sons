@@ -7,6 +7,7 @@ export default function SocietySurvey() {
   const [responses, setResponses] = useState<Record<string, string>>({});
   const [language, setLanguage] = useState<"en" | "tr" | "ar">("en");
   const [ratings, setRatings] = useState<Record<string, number>>({});
+  type PdfLabels = { [key: string]: string };
   const translations = {
     en: {
       title: "Özyurtlar N Towers Site Survey Form",
