@@ -191,7 +191,7 @@ export default function SocietySurvey() {
   doc.text(translations[language].thankYou, 20, 35);
 
   let y = 50;
-  const labels = translations[language].pdfLabels; // ✅ now defined
+  const labels = translations[language].pdfLabels as Record<string, string>;
 
   Object.entries(responses).forEach(([key, value]) => {
     const label = labels[key] || key;
